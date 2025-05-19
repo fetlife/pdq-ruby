@@ -61,14 +61,9 @@ end
 
 # == "rust build" enhancements ==============================================
 
-
-
 RbSys::ExtensionTask.new("pdq", GEMSPEC) do |ext|
   ext.lib_dir = "ext/pdq"
 end
-
-
-
 
 require "date"
 require "open-uri"
