@@ -11,3 +11,7 @@ crate-type = ["cdylib"]
 
 [dependencies]
 magnus = { version = "0.6.2" }
+pdqhash = { git = "https://github.com/fetlife/pdqhash", package = "pdqhash" }
+
+[build-dependencies]
+rb-sys-env = "0.2.2"

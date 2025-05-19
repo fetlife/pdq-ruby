@@ -1,23 +1,41 @@
-# Pdq
+# Pdq-ruby
 
-TODO: Delete this and the text below, and describe your gem
+## Description
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/pdq`. To experiment with that code, run `bin/console` for an interactive prompt.
+pdq-ruby is a Ruby gem that provides a convenient wrapper around the PDQ (Photo DNA Quick) hash algorithm implementation. PDQ is a perceptual image hashing algorithm developed by Facebook (now Meta) that generates compact binary fingerprints of images. These fingerprints can be used to:
+
+- Detect duplicate or near-duplicate images
+- Identify similar images even after modifications
+- Perform efficient image similarity searches
+- Support content moderation and copyright protection
+
+The gem provides a Ruby-friendly interface to the Rust-based PDQ implementation, making it easy to:
+
+- Generate PDQ hashes from images
+- Compare images for similarity
+- Handle various image formats
+- Process images efficiently with native performance
+
+Based on to darwinium-com's [pdqhash](https://github.com/darwinium-com/pdqhash) implementation.
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+Add this line to your application's Gemfile:
 
-Install the gem and add to the application's Gemfile by executing:
-
-```bash
-bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+```ruby
+gem 'pdq', git: 'https://github.com/fetlife/pdq-ruby.git'
 ```
 
-If bundler is not being used to manage dependencies, install the gem by executing:
+And then execute:
 
 ```bash
-gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+bundle install
+```
+
+Or install it yourself as:
+
+```bash
+gem install pdq --source https://github.com/fetlife/pdq-ruby.git
 ```
 
 ## Usage
@@ -32,7 +50,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/Pezmc/pdq. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/Pezmc/pdq/blob/main/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/fetlife/pdq-ruby. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/fetlife/pdq-ruby/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -40,4 +58,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Pdq project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/Pezmc/pdq/blob/main/CODE_OF_CONDUCT.md).
+Everyone interacting in the pdq-ruby project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/fetlife/pdq-ruby/blob/main/CODE_OF_CONDUCT.md).
