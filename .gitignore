@@ -12,3 +12,4 @@
 *.bundle
 
 .DS_Store
+.rspec_status

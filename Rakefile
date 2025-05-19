@@ -9,9 +9,11 @@ RSpec::Core::RakeTask.new(:spec)
 
 GEMSPEC = Gem::Specification.load("pdq.gemspec")
 
-task build: :compile
-
 task default: %i[compile spec standard]
+
+# Aliases
+task build: :compile
+task test: :spec
 
 # == "rake release" enhancements ==============================================
 
@@ -61,9 +63,12 @@ end
 
 # == "rust build" enhancements ==============================================
 
-RbSys::ExtensionTask.new("pdq", GEMSPEC) do |ext|
-  ext.lib_dir = "ext/pdq"
+Rake::ExtensionTask.new("pdq") do |ext|
+  ext.ext_dir = "ext/pdq" # Source dir with extconf.rb / Cargo.toml
+  ext.lib_dir = "lib/pdq" # Where compiled .bundle will go
 end
+
+# == Helpers ================================================================
 
 require "date"
 require "open-uri"

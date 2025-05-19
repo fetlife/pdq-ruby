@@ -1,16 +1,28 @@
-use magnus::{function, prelude::*, Error, Ruby, RString};
+use magnus::{function, prelude::*, Error, Ruby, RString, RArray};
+use image::ImageReader;
+use pdqhash::generate_pdq;
+use hex;
 
-/*let image = image::load_from_memory(bytes).unwrap();
+fn pdq_hash(image_path: RString) -> RArray {
+    let path = image_path.to_string()
+        .expect("Failed to convert path to string");
+    
+    // Load the image
+    let img = ImageReader::open(path)
+        .expect("Failed to open image")
+        .decode()
+        .expect("Failed to decode image");
+    
+    // Generate PDQ hash
+    let (hash, quality) = generate_pdq(&img)
+        .expect("Failed to generate PDQ hash");
+    
+    // Create Ruby array with hash and quality
+    let result = RArray::new();
+    result.push(hex::encode(hash)).unwrap();
+    result.push(quality).unwrap();
 
-c.bench_function("load_bridge", |b| {
-    b.iter(|| dwn_pdq::generate_pdq_full_size(&image))
-});*/
-
-fn pdq_hash(image_path: RString) -> String {
-    let _path = image_path.to_string();
-    // Load the image, run PDQ, return the hash as a hex string
-    // Placeholder for actual logic
-    "fake_pdq_hash".to_string()
+    result
 }
 
 #[magnus::init]
