@@ -4,14 +4,11 @@
 /coverage/
 /doc/
 /pkg/
+/site/
 /spec/reports/
 /tmp/
+/Gemfile.lock
+/target
 *.bundle
-*.so
-*.o
-*.a
-mkmf.log
-target/
 
-# rspec failure tracking
-.rspec_status
+.DS_Store

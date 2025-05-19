@@ -1,5 +1,10 @@
 # Pdq-ruby
 
+[![Gem Version](https://img.shields.io/gem/v/pdq-ruby)](https://rubygems.org/gems/pdq-ruby)
+[![Gem Downloads](https://img.shields.io/gem/dt/pdq-ruby)](https://www.ruby-toolbox.com/projects/pdq-ruby)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/fetlife/pdq-ruby/ci.yml)](https://github.com/Pezmc/pdq-ruby/actions/workflows/ci.yml)
+[![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/Pezmc/pdq-ruby)](https://codeclimate.com/github/Pezmc/pdq-ruby)
+
 ## Description
 
 pdq-ruby is a Ruby gem that provides a convenient wrapper around the PDQ (Photo DNA Quick) hash algorithm implementation. PDQ is a perceptual image hashing algorithm developed by Facebook (now Meta) that generates compact binary fingerprints of images. These fingerprints can be used to:
@@ -16,7 +21,7 @@ The gem provides a Ruby-friendly interface to the Rust-based PDQ implementation,
 - Handle various image formats
 - Process images efficiently with native performance
 
-Based on to darwinium-com's [pdqhash](https://github.com/darwinium-com/pdqhash) implementation.
+Wrapper of darwinium-com's [pdqhash](https://github.com/darwinium-com/pdqhash) rust implementation.
 
 ## Installation
 
