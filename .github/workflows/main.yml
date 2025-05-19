@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby: ["3.3", "3.4", "head"]
+        ruby: ["3.3", "3.4"]
 
     steps:
       - uses: actions/checkout@v4
