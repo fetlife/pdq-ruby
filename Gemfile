@@ -8,4 +8,4 @@ gemspec
 gem "rake", "~> 13.3"
 gem "rake-compiler"
 gem "rspec", "~> 3.13"
-gem "standard", "~> 1.51"
+gem "standard", "~> 1.52"
