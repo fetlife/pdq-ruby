@@ -1,28 +1,62 @@
-use magnus::{function, prelude::*, Error, Ruby, RString, RArray};
-use image::ImageReader;
-use pdqhash::generate_pdq;
 use hex;
+use image::ImageReader;
+use magnus::{
+    Error, ExceptionClass, RArray, RModule, RString, Ruby, function, gc::register_mark_object, prelude::*, value::Lazy
+};
+use pdqhash::generate_pdq;
 
-fn pdq_hash(image_path: RString) -> RArray {
-    let path = image_path.to_string()
-        .expect("Failed to convert path to string");
-    
+static PDQ_ERROR: Lazy<ExceptionClass> = Lazy::new(|ruby| {
+    let ex = ruby
+        .class_object()
+        .const_get::<_, RModule>("Pdq")
+        .unwrap()
+        .const_get("Error")
+        .unwrap();
+    // ensure `ex` is never garbage collected (e.g. if constant is
+    // redefined) and also not moved under compacting GC.
+    // ruby.gc_register_mark_object(ex);
+    register_mark_object(ex);
+    ex
+});
+
+fn pdq_hash(ruby: &Ruby, image_path: RString) -> Result<RArray, Error> {
+    let path = image_path.to_string().map_err(|e| {
+        Error::new(
+            ruby.get_inner(&PDQ_ERROR),
+            format!("Failed to convert path to string: {}", e),
+        )
+    })?;
+
     // Load the image
     let img = ImageReader::open(path)
-        .expect("Failed to open image")
+        .map_err(|e| {
+            Error::new(
+                ruby.get_inner(&PDQ_ERROR),
+                format!("Failed to open image: {}", e),
+            )
+        })?
         .decode()
-        .expect("Failed to decode image");
-    
+        .map_err(|e| {
+            Error::new(
+                ruby.get_inner(&PDQ_ERROR),
+                format!("Failed to decode image: {}", e),
+            )
+        })?;
+
     // Generate PDQ hash
-    let (hash, quality) = generate_pdq(&img)
-        .expect("Failed to generate PDQ hash");
-    
+    let (hash, quality) = generate_pdq(&img).ok_or_else(|| {
+        Error::new(
+            ruby.get_inner(&PDQ_ERROR),
+            format!("Failed to generate PDQ hash"),
+        )
+    })?;
+
     // Create Ruby array with hash and quality
-    let result = RArray::new();
+    let result = ruby.ary_new();
     result.push(hex::encode(hash)).unwrap();
     result.push(quality).unwrap();
 
-    result
+    Ok(result)
 }
 
 #[magnus::init]
