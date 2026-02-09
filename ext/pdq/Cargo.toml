@@ -10,10 +10,10 @@ publish = false
 crate-type = ["cdylib"]
 
 [dependencies]
-magnus = { version = "0.6.2" }
+magnus = { version = "0.8.2" }
 pdqhash = { git = "https://github.com/fetlife/pdqhash", package = "pdqhash" }
 image = "0.25"
 hex = "0.4"
 
 [build-dependencies]
-rb-sys-env = "0.2.2"
+rb-sys-env = "0.2.3"
