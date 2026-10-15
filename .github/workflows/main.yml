@@ -20,7 +20,8 @@ jobs:
       - run: bundle exec rake standard
   build:
     name: "Test / Ruby ${{ matrix.ruby }}"
-    runs-on: ubuntu-26.04
+    # rb-sys generates incompatible Ruby bindings with ubuntu-26.04's libclang.
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         ruby: ["3.3", "3.4"]
